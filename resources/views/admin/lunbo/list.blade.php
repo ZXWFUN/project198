@@ -36,10 +36,10 @@
         @foreach($lun as $v)
           <tr>
             
-            <td><img src="{{ $v['lun_tu ']}}"></td>
+            <td><img src="{{ $v['lun_tu']}}"></td>
             
             <td class="td-manage">
-              <a title="删除" onclick="member_del(this,'{{ $v->lunid }}')" href="javascript:;">
+              <a title="删除" onclick="member_del(this,'{{ $v['lunid'] }}')" href="javascript:;">
                 <i class="layui-icon">&#xe640;</i> 
               </a>
             </td>

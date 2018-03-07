@@ -125,7 +125,7 @@
             </li>
             <li>
                 <a href="javascript:;">
-                    <i class="layui-icon" style="font-size: 20px">&#xe6ed;</i>
+                    <i class="layui-icon" style="font-size: 20px">&#xe652;</i>
                     <cite style="font-size: 16px">影片管理</cite>
                     <i class="iconfont nav_right">&#xe697;</i>
                 </a>

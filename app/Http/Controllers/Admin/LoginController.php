@@ -63,22 +63,22 @@ class LoginController extends Controller
         header("Content-Type:image/jpeg");
         $builder->output();
     }
-    
+
     //处理用户登录逻辑
     public function doLogin(Request $request)
     {
 
 //        $input = Input::only('username','password');
-          $input = $request->except('_token');
+        $input = $request->except('_token');
 
 //          2. 验证数据有效性
 //        $validator = Validator::make(需要验证的数据，验证规则，错误提示信息);
 
 //        验证规则
-          $rule = [
-              'username'=>'required|between:5,18',
-              'password'=>'required|between:5,20|alpha_dash'
-          ];
+        $rule = [
+            'username'=>'required|between:5,18',
+            'password'=>'required|between:5,20|alpha_dash'
+        ];
 
 //          错误提示信息
         $msg =[
@@ -130,8 +130,8 @@ class LoginController extends Controller
 //        crypt加密
         $str = '123456';
         return  Crypt::encrypt($str);
-       $cryptstr = 'eyJpdiI6ImpYdFBpc3gzb043OWdRXC9vellRMUF3PT0iLCJ2YWx1ZSI6IlQrYkt0Ump3Uk1nTHFtb21zUGtwSXc9PSIsIm1hYyI6ImQ0ZTBmNDg5YWU3MDgwODU0YmZjNDRhMTdkNmJkODc4MjRiZjQwZTI1NmMwZTExMjc3MTZkNjJjNmQ0YmIzMTQifQ==';
-       return Crypt::decrypt($cryptstr);
+        $cryptstr = 'eyJpdiI6ImpYdFBpc3gzb043OWdRXC9vellRMUF3PT0iLCJ2YWx1ZSI6IlQrYkt0Ump3Uk1nTHFtb21zUGtwSXc9PSIsIm1hYyI6ImQ0ZTBmNDg5YWU3MDgwODU0YmZjNDRhMTdkNmJkODc4MjRiZjQwZTI1NmMwZTExMjc3MTZkNjJjNmQ0YmIzMTQifQ==';
+        return Crypt::decrypt($cryptstr);
     }
 
 
@@ -173,7 +173,7 @@ class LoginController extends Controller
     {
         return view('admin.welcome');
     }
-    
+
 //    服务器全局变量
     public function msg()
     {

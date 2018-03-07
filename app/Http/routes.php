@@ -54,7 +54,7 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'login'],func
 //    批量删除用户路由
     Route::get('user/del','UserController@del');
     Route::resource('user','UserController');
-});
+
 
 
 
@@ -90,3 +90,25 @@ Route::get('admin/role/auth/{id}','Admin\RoleController@auth');
 Route::post('admin/role/doauth','Admin\RoleController@doAuth');
 //权限模块路由
 Route::resource('admin/permission','Admin\PermissionController');
+
+
+    
+
+    // 分类模块路由
+    Route::resource('cate','CateController');
+
+    // 修改状态
+    Route::get('film/changeStatus','FilmController@changeStatus');
+     // 电影模块
+    Route::resource('film','FilmController'); 
+        //文件上传
+    Route::post('film/upload','FilmController@upload');  
+    // 影院模块路由
+    Route::resource('cinema','CinemaController'); 
+   
+});
+
+Route::get('/code/captcha/{tmp}', 'Admin\LoginController@captcha');
+
+
+

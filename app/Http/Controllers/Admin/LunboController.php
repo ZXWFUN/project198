@@ -6,12 +6,12 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Model\News;
+use App\Model\Lunbo;
 use DB;
-use App\Model\Article;
-class ArticleController extends Controller
+use App\Model\User;
+class LunboController extends Controller
 {
-    //文件上传处理
+     //文件上传处理
     public function upload(Request $request)
     {
         //获取上传文件
@@ -30,9 +30,6 @@ class ArticleController extends Controller
             return '/upload/'.$newfilename;
         }
     }
-
-
-
     /**
      * Display a listing of the resource.
      *
@@ -40,20 +37,9 @@ class ArticleController extends Controller
      */
     public function index(Request $request)
     {
-        // $art = article::with('artfun')->paginate(5);
-        $guanjian = $request->input('gjz','');             
-        $art = Article::where('art_title','like','%'.$guanjian.'%')->paginate(4); 
-        // foreach($art as $v){
-        //     $art1 = $v->artfun;
-        //     $art['art_title'] = $art1['art_title'];
-        //     $art['news_id'] = $art1['news_name'];
-        //     $art['art_thumb'] = $art1['art_thumb'];
-        //     $art['art_content'] = $art1['art_content'];
-        //     $art['art_time'] = $art1['art_time'];
-        //     $art['art_editor'] = $art1['art_editor'];
-        // }
-        // dd($art1);
-        return view('admin.article.list',compact('art','request'));
+        //
+        $lun = DB::table('lunbo')->get();
+        return view('admin.lunbo.list',compact('lun','request'));
     }
 
     /**
@@ -61,12 +47,11 @@ class ArticleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
         //
-        $news = DB::table('news')->get();
-        
-        return view('admin.article.add',compact('news'));
+        //$u = DB::table('user')->get();
+        return view('admin.lunbo.add');
     }
 
     /**
@@ -77,10 +62,11 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
+        //
         //接收表单数据
         $input = $request->except('_token','file_upload');
         // dd($input);
-         $res = Article::create($input);
+         $res = Lunbo::create($input);
 
          if($res){
             $data = [
@@ -116,12 +102,7 @@ class ArticleController extends Controller
      */
     public function edit($id)
     {
-        // return $id;
-
-        //$id = DB::table('article')->value('art_id');
-        $aid = Article::find($id);
-        $news = DB::table('news')->get();
-        return view('admin.article.edit',compact('aid','news'));
+        //
     }
 
     /**
@@ -133,27 +114,7 @@ class ArticleController extends Controller
      */
     public function update(Request $request, $id)
     {
-         //根据id,获取要修改的用户
-        $art = Article::find($id);
-        // dd($request->all());
-        //将用户的相关属性修改为用户提交的值
-        $input = $request->all();
-
-        $res = $art->update(['art_title'=>$input['art_title'],'art_thumb'=>$input['art_thumb'],'art_content'=>$input['art_content']]);
-
-        if($res){
-            $data = [
-                'status'=>0,
-                'msg'=>'修改成功'
-            ];
-        }else{
-            $data = [
-                'status'=>1, 
-                'msg'=>'修改失败'
-            ];
-        }
-
-        return $data;
+        //
     }
 
     /**
@@ -164,9 +125,8 @@ class ArticleController extends Controller
      */
     public function destroy($id)
     {
-        //找到要删除的记录，并删除
-       // $id = DB::table('article')->value('art_id');
-        $res =  article::find($id)->delete();
+        //
+         $res =  lunbo::find($id)->forceDelete();
         if($res){
             $data = [
                 'status'=>0,
@@ -182,4 +142,5 @@ class ArticleController extends Controller
         return $data;
     
     }
+    
 }

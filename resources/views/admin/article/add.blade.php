@@ -29,7 +29,7 @@
         @endif
     </div>
     <div class="x-body">
-        <form id="art_form" class="layui-form" action="{{ url('article') }}" method="post" enctype="multipart/form-data">
+        <form id="art_form" class="layui-form" enctype="multipart/form-data">
           <div class="layui-form-item">
               <label for="L_email" class="layui-form-label">
                   <span class="x-red">*</span>分类
@@ -175,9 +175,47 @@
           });
 
           //监听提交
-          form.on('submit(add)', function(){
-             //刷新父页面
-             location.reload();
+          form.on('submit(add)', function(data){
+             $.ajax({
+                  type : "POST", //提交方式
+                  headers: {
+                      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                  },
+                  url : '/article',//路径
+                  data : data.field,//数据，这里使用的是Json格式进行传输
+                  dataType : "Json",
+                  success : function(result) {//返回数据根据结果进行相应的处理
+                     console.log(result);
+                     // 如果ajax的返回数据对象的status属性值是0，表示用户添加成功；弹添加成功的提示信息
+                     if(result.status == 0){
+                         layer.alert(result.msg, {icon: 6},function () {
+                             // // 获得frame索引
+                             //var index = parent.layer.getFrameIndex(window.name);
+                             // //关闭当前frame
+                             //parent.layer.close(index);
+
+                             //刷新父页面
+                            parent.location.reload();
+                         });
+                     }else{
+                         layer.alert(result.msg, {icon: 6},function () {
+                             // 获得frame索引
+                             // var index = parent.layer.getFrameIndex(window.name);
+                             // //关闭当前frame
+                             // parent.layer.close(index);
+
+                             parent.location.reload();
+                         });
+                     }
+                  }
+              });
+
+
+
+              console.log(data);
+            //发异步，把数据提交给php
+
+            return false;
           });
           
           

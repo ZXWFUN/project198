@@ -34,7 +34,7 @@
       <table class="layui-table">
         <thead>
           <tr>
-            <th>名称 </th>
+            <th>名称</th>
             <th>资讯类别</th>
             <th>缩略图</th>
             <th>内容</th>
@@ -54,7 +54,7 @@
             <td>{{ $v->art_editor }}</td>
             <td class="td-manage">
 
-              <a title="编辑"  onclick="x_admin_show('编辑','{{url('article/'.$v->art_id.'/edit')}}',990,450)" href="javascript:;">
+              <a title="查看订单详情"  onclick="x_admin_show('查看','{{url('article/'.$v->art_id.'/edit')}}',990,450)" href="javascript:;">
                 <i class="layui-icon">&#xe642;</i>
               </a>
 

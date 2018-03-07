@@ -22,44 +22,25 @@
   
   <body>
   
-    <div class="x-body">
-      <div class="layui-row">
-          <form class="layui-form layui-col-md12 x-so" method="get" action="{{ url('article') }}">
-          
-          <input type="text" name="gjz" value="{{$request->gjz}}"  placeholder="请输入要搜索的标题" autocomplete="off" class="layui-input">
-          <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
-        </form>
-      </div>
-     
+    <div class="x-body">     
       <table class="layui-table">
         <thead>
           <tr>
-            <th>名称 </th>
-            <th>资讯类别</th>
-            <th>缩略图</th>
-            <th>内容</th>
-            <th>发布时间</th>
-            <th>发布人</th>
+            
+            <th>轮播图</th> 
             <th>操作</th>
+    
             </tr>
         </thead>
         <tbody>
-        @foreach($art as $v)
+        @foreach($lun as $v)
           <tr>
-            <td>{{ $v->art_title }}</td>
-            <td>{{ $v->news_id }}</td>
-            <td><img src="{{ $v->art_thumb }}"></td>
-            <td>{!! $v->art_content !!}</td>
-            <td>{{ $v->art_time }}</td>
-            <td>{{ $v->art_editor }}</td>
+            
+            <td><img src="{{ $v->lun_tu }}"></td>
+            
             <td class="td-manage">
-
-              <a title="编辑"  onclick="x_admin_show('编辑','{{url('article/'.$v->art_id.'/edit')}}',990,450)" href="javascript:;">
-                <i class="layui-icon">&#xe642;</i>
-              </a>
-
-              <a title="删除" onclick="member_del(this,'{{ $v->art_id }}')" href="javascript:;">
-                <i class="layui-icon">&#xe640;</i>
+              <a title="删除" onclick="member_del(this,'{{ $v->lunid }}')" href="javascript:;">
+                <i class="layui-icon">&#xe640;</i> 
               </a>
             </td>
           </tr>
@@ -72,7 +53,6 @@
    
      <div class="page">
 
-        {!! $art->appends($request->all())->render() !!}
       </div>
     <script>
       layui.use(['form','laydate','layer'], function(){
@@ -111,7 +91,7 @@
           layer.confirm('确认要删除吗？',function(data){
               //发异步删除数据
               // $.post('URL地址'.'携带的参数',成功后的闭包函数)
-              $.post('{{ url('article') }}/'+id,{"_token":"{{csrf_token()}}","_method":"delete","id":id},function(data){
+              $.post('{{ url('lunbo') }}/'+id,{"_token":"{{csrf_token()}}","_method":"delete","id":id},function(data){
                   if(data.status == 0){
                       $(obj).parents("tr").remove();
                       layer.msg('已删除!',{icon:1,time:1000});

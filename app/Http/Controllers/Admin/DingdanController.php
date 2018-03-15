@@ -6,17 +6,19 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
-class NewsController extends Controller
+use App\Model\Dingdan;
+class DingdanController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
+    public function index(Request $request)
+    { 
+        $guanjian = $request -> input('gjz','');
+        $dd = Dingdan::where('dd_number','like','%'.$guanjian.'%')->paginate(1);
+        return view('admin.dingdan.list',compact('dd','request'));
     }
 
     /**

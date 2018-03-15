@@ -19,7 +19,12 @@ class Article extends Model
     public $guarded = [];
     protected $dates = ['deleted_at'];
     public function artfun()
+    { 
+        return $this->belongsTo('App\Model\News','news_id'); 
+    }
+
+    public function artfilm()
     {
-        return $this->hasOne('App\Model\News','news_id');
+        return $this->hasOne('App\Model\Film','tid');
     }
 }

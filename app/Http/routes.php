@@ -113,4 +113,40 @@ Route::resource('news','Admin\NewsController');
 Route::resource('lunbo','Admin\LunboController');
 //轮播图上传
 Route::post('lunbo/upload','Admin\LunboController@upload');
+// 首页
+Route::get('/home/index','Home\HomeController@index');
+//前台相关页面
+Route::get('index','Home\IndexController@index');
+Route::get('news','Home\IndexController@news');
+Route::get('hot','Home\IndexController@hot'); 
+Route::get('xiangqing/{id}','Home\IndexController@xiangqing');
+//前台购买后第一步页面
+Route::get('goumai1/{id}/{aid}','Home\HomeController@goumai1');
+Route::get('goumai2/{id}/{aid}/{ids}','Home\HomeController@goumai2');
+//jjyy页面路由
+Route::get('jjyy/{id}/{aid}/{ids}','Home\HomeController@jjyy');
+//选座路由
+Route::post('seat','Home\HomeController@seat');
+//买位置路由
+Route::post('mai','Home\HomeController@mai');
+//影院路由
+Route::get('yy','Home\HomeController@yy');
+//后台订单模块 
+Route::get('dingdan','Admin\DingdanController@index');  
+
+// 前台模块
+
+// 电影详情页
+Route::get('/home/films/{id}','Home\HomeController@show');
+// 电影分类
+Route::get('/home/cate/','Home\HomeController@cate');
+// 分类电影显示
+Route::post('/home/cate/films/{id}','Home\HomeController@films');
+// 榜单页面
+Route::get('/home/list','Home\HomeController@list');
+// 搜索页面
+Route::get('/home/search','Home\HomeController@search');
+
+
+
 

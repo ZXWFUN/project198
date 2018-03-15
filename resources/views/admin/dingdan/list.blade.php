@@ -24,9 +24,8 @@
   
     <div class="x-body">
       <div class="layui-row">
-          <form class="layui-form layui-col-md12 x-so" method="get" action="{{ url('article') }}">
-          
-          <input type="text" name="gjz" value="{{$request->gjz}}"  placeholder="请输入要搜索的标题" autocomplete="off" class="layui-input">
+          <form class="layui-form layui-col-md12 x-so" method="get" action="{{ url('dingdan') }}">
+          <input type="text" name="gjz" value="{{$request->gjz}}"  placeholder="请输入订单号查询" autocomplete="off" class="layui-input">
           <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
         </form>
       </div>
@@ -34,24 +33,26 @@
       <table class="layui-table">
         <thead>
           <tr>
-            <th>名称</th>
-            <th>资讯类别</th>
-            <th>缩略图</th>
-            <th>内容</th>
-            <th>发布时间</th>
-            <th>发布人</th>
+            <th>订单编号</th>
+            <th>影院名</th>
+            <th>影片名</th>
+            <th>订单时间</th>
+            <th>订单座位</th>
+            <th>订单金额</th>
+            <th>订单状态</th>
             <th>操作</th>
             </tr>
         </thead>
         <tbody>
-        @foreach($art as $v)
+        @foreach($dd as $v)
           <tr>
-            <td>{{ $v->art_title }}</td>
-            <td>{{ $v->news_id }}</td>
-            <td><img src="{{ $v->art_thumb }}"></td>
-            <td>{!! $v->art_content !!}</td>
-            <td>{{ $v->art_time }}</td>
-            <td>{{ $v->art_editor }}</td>
+            <td>{{ $v['dd_number'] }}</td>
+            <td>{{ $v['dd_yuan'] }}</td>
+            <td>{{ $v['dd_pian'] }}</td>
+            <td>{{ $v['dd_time'] }}</td>
+            <td>{{ $v['dd_zuo'] }}</td>          
+            <td>{{ $v['dd_money'] }}</td>
+            <td>{{ $v['dd_status'] }}</td> 
             <td class="td-manage">
 
               <a title="查看订单详情"  onclick="x_admin_show('查看','{{url('article/'.$v->art_id.'/edit')}}',990,450)" href="javascript:;">
@@ -72,7 +73,7 @@
    
      <div class="page">
 
-        {!! $art->appends($request->all())->render() !!}
+        {!! $dd->appends($request->all())->render() !!}
       </div>
     <script>
       layui.use(['form','laydate','layer'], function(){

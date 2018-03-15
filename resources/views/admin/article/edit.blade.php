@@ -38,7 +38,7 @@
                   <select name="news_id">
                       <!--{{--<option value="0">请选择分类</option>--}}-->
                       <@foreach($news as $v)
-                      <option value="{{ $v->news_id }}">{{ $v->news_name }}</option>
+                      <option value="{{ $v['news_id'] }}">{{ $v['news_name'] }}</option>
                       @endforeach
                   </select>
               </div>
@@ -170,7 +170,7 @@
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                url : '/article/{{$aid->art_id}}',//路径
+                url : '/article/{{$aid['art_id']}}',//路径
                 data : data.field,//数据，这里使用的是Json格式进行传输
                 dataType : "Json",
                 success : function(result) {//返回数据根据结果进行相应的处理

@@ -41,10 +41,18 @@ class ArticleController extends Controller
     public function index(Request $request)
     {
         // $art = article::with('artfun')->paginate(5);
-        $guanjian = $request->input('gjz','');             
-        $art = Article::where('art_title','like','%'.$guanjian.'%')->paginate(4); 
-
-        return view('admin.article.list',compact('art','request'));
+       // $guanjian = $request->input('gjz','');             
+        //$art = Article::where('art_title','like','%'.$guanjian.'%')->paginate(4); 
+        //$accounts = User::find(10)->hasManyPays()->get();
+        $art = new Article;
+        $guanjian = $request -> input('gjz','');
+        $data = $art->where('art_title','like','%'.$guanjian.'%')->paginate(4);
+        foreach($data as $v){
+          $data1 = $v->artfun;
+          $v['news_id'] = $data1['news_name'];
+        }
+        //return view('admin/index/index',['title'=>'用户列表','data'=>$data,'request'=>$request->all()]);
+        return view('admin.article.list',['data'=>$data,'request'=>$request]);
     }
 
     /**
@@ -126,11 +134,12 @@ class ArticleController extends Controller
     {
          //根据id,获取要修改的用户
         $art = Article::find($id);
+        $news = DB::table('news')->get();
         // dd($request->all());
         //将用户的相关属性修改为用户提交的值
         $input = $request->all();
-
-        $res = $art->update(['art_title'=>$input['art_title'],'art_thumb'=>$input['art_thumb'],'art_content'=>$input['art_content']]);
+ 
+        $res = $art->update(['news_id'=>$input['news_id'],'art_title'=>$input['art_title'],'art_thumb'=>$input['art_thumb'],'art_content'=>$input['art_content']]);
 
         if($res){
             $data = [

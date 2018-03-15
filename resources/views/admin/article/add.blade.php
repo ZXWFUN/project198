@@ -209,16 +209,10 @@
                      }
                   }
               });
-
-
-
               console.log(data);
             //发异步，把数据提交给php
-
             return false;
-          });
-          
-          
+          });          
         });
     </script>
     <script>var _hmt = _hmt || []; (function() {

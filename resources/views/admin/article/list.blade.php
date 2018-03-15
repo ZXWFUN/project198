@@ -44,11 +44,11 @@
             </tr>
         </thead>
         <tbody>
-        @foreach($art as $v)
+        @foreach($data as $v)
           <tr>
             <td>{{ $v->art_title }}</td>
             <td>{{ $v->news_id }}</td>
-            <td><img src="{{ $v->art_thumb }}"></td>
+            <td><img src="{{ $v->art_thumb }}"></td> 
             <td>{!! $v->art_content !!}</td>
             <td>{{ $v->art_time }}</td>
             <td>{{ $v->art_editor }}</td>
@@ -72,7 +72,7 @@
    
      <div class="page">
 
-        {!! $art->appends($request->all())->render() !!}
+        {!! $data->appends($request->all())->render() !!}
       </div>
     <script>
       layui.use(['form','laydate','layer'], function(){
